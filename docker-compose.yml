@@ -1,0 +1,54 @@
+services:
+  api:
+    container_name: templete_api
+    build:
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/project
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - interconnect
+      - postgres.network
+    env_file:
+      - "./.env"
+    command: /bin/sh -c 'alembic upgrade head && python -m src'
+
+  redis:
+    container_name: redis
+    image: redis:7-alpine
+    ports:
+      - '6370:6379'
+    networks:
+      - interconnect
+
+  postgres:
+    container_name: postgres
+    image: postgres:15.6-alpine3.19
+    restart: unless-stopped
+    ports:
+      - '5444:5432'
+    networks:
+      - interconnect
+      - postgres.network
+    env_file:
+      - "./.env"
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_DB: test
+      POSTGRES_PASSWORD: test
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+
+volumes:
+  postgres_data:
+
+networks:
+  interconnect:
+    driver: bridge
+  postgres.network: {}

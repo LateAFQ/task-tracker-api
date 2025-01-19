@@ -1,0 +1,63 @@
+[tool.poetry]
+name = "template_api"
+version = "0.1.0"
+description = ""
+authors = ["lateafq"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.4"
+alembic = "^1.13.3"
+sqlalchemy = "^2.0.36"
+uvloop = "^0.21.0"
+asyncpg = "^0.30.0"
+pydantic-settings = "^2.6.1"
+orjson = "^3.10.11"
+uvicorn = "^0.32.0"
+argon2-cffi = "^23.1.0"
+certifi = "^2024.8.30"
+aiohttp = "^3.10.10"
+redis = "^5.2.0"
+types-redis = "^4.6.0.20241004"
+greenlet = "^3.1.1"
+pyjwt = "^2.10.1"
+aiohttp-socks = "^0.10.1"
+black = "^24.10.0"
+
+
+
+[tool.poetry.group.lint]
+optional = true
+
+[tool.poetry.group.lint.dependencies]
+ruff = "*"
+mypy = "*"
+
+[tool.mypy]
+# disable_error_code = ["union-attr", "var-annotated"]
+warn_unused_ignores = false
+follow_imports_for_stubs = true
+pretty = true
+show_absolute_path = true
+hide_error_codes = false
+show_error_context = true
+strict = true
+warn_unreachable = true
+warn_no_return = true
+
+[tool.ruff]
+lint.ignore = ["E501", "B008", "C901", "W191", "UP007", "UP006", "UP035"]
+
+lint.select = ["E", "W", "F", "I", "C", "B", "UP"]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "src"]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-p no:warnings"                      # Disabling warning capture entirely
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
