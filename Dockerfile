@@ -32,8 +32,4 @@ COPY poetry.lock pyproject.toml  /usr/src/project/
 ENV PATH="/root/.cargo/bin:${PATH}"
 RUN poetry install --no-root --no-interaction --no-ansi
 
-
-# --no-dev
-# RUN poetry install $(test "$YOUR_ENV" == production && echo "--only=main") --no-interaction --no-ansi
-
 COPY . .

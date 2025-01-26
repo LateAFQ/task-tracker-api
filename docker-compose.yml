@@ -1,6 +1,6 @@
 services:
   api:
-    container_name: templete_api
+    container_name: task_tracker_api
     build:
       dockerfile: ./Dockerfile
     restart: unless-stopped

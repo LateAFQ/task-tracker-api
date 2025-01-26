@@ -7,9 +7,12 @@ from sqlalchemy.orm import RelationshipProperty
 from src.database.models.base import Base
 
 from .role import Role
+from .task import Task
+from .task_category import TaskCategory
+from .task_category_association import task_category_association
 from .user import User
 
-__all__ = ("Base", "User", "Role")
+__all__ = ("Base", "User", "Role", "TaskCategory", "task_category_association", "Task")
 
 
 def _retrieve_relationships() -> (

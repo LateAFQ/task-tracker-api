@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "template_api"
+name = "task_tracker_api"
 version = "0.1.0"
 description = ""
 authors = ["lateafq"]

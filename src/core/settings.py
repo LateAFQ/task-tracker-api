@@ -97,57 +97,11 @@ class CipherSettings(BaseSettings):
     refresh_token_expire_seconds: int = 604800
 
 
-class AesCipherSettings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file="./.env",
-        case_sensitive=False,
-        env_prefix="AESCIPHER_",
-        extra="ignore",
-    )
-    secret_key: str = ""
-
-
-class FixedFloatSettings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file="./.env",
-        case_sensitive=False,
-        env_prefix="HUOBI_",
-        extra="ignore",
-    )
-    secret_token: str = ""
-    access_token: str = ""
-    base_url: str = ""
-
-
-class BotSettings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file="./.env",
-        case_sensitive=False,
-        env_prefix="BOT_",
-        extra="ignore",
-    )
-    token: str = ""
-
-
-class TronSettings(BaseSettings):
-    model_config = SettingsConfigDict(
-        case_sensitive=False,
-        env_prefix="TRON_",
-        extra="ignore",
-    )
-
-    grid_api: str = ""
-
-
 class Settings(BaseSettings):
     db: DatabaseSettings
     redis: RedisSettings
     server: ServerSettings
     ciphers: CipherSettings
-    aescipher: AesCipherSettings
-    ff: FixedFloatSettings
-    bot: BotSettings
-    tron: TronSettings
 
 
 def load_settings(
@@ -155,18 +109,10 @@ def load_settings(
     redis: Optional[RedisSettings] = None,
     server: Optional[ServerSettings] = None,
     ciphers: Optional[CipherSettings] = None,
-    ff: Optional[FixedFloatSettings] = None,
-    bot: Optional[BotSettings] = None,
-    tron: Optional[TronSettings] = None,
-    aescipher: Optional[AesCipherSettings] = None,
 ) -> Settings:
     return Settings(
         db=db or DatabaseSettings(),
         redis=redis or RedisSettings(),
         server=server or ServerSettings(),
         ciphers=ciphers or CipherSettings(),
-        ff=ff or FixedFloatSettings(),
-        bot=bot or BotSettings(),
-        tron=tron or TronSettings(),
-        aescipher=aescipher or AesCipherSettings(),
     )

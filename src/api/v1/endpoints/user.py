@@ -39,9 +39,9 @@ async def get_user_by_id_endpoint(
     "",
     status_code=status.HTTP_200_OK,
     response_model=dtos.PublicUser,
+    dependencies=[Depends(Authorization("Admin"))],
 )
 async def delete_user_endpoint(
-    user: Annotated[dtos.PrivateUser, Authorization()],
     query: Annotated[dtos.DeleteUser, Depends(dtos.DeleteUser)],
     mediator: Annotated[MediatorProtocol, Depends()],
 ) -> OkResponse[dtos.PublicUser]:
