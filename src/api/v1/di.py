@@ -15,7 +15,7 @@ from src.database.gateway import DBGateway
 from src.services import (
     create_internal_service_gateway_factory,
 )
-from src.services.internal.gateway import InternalServiceGateway
+from src.services.gateway import InternalServiceGateway
 
 DependencyType = TypeVar("DependencyType")
 

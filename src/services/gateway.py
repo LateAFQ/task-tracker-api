@@ -2,9 +2,9 @@ from src.api.common.cache.redis import RedisCache
 from src.api.common.security.jwt import JWT
 from src.common.interfaces.gateway import BaseGateway
 from src.database import DBGateway
-from src.services.internal.auth import AuthService
-from src.services.internal.role import RoleService
-from src.services.internal.user import UserService
+from src.services.auth import AuthService
+from src.services.role import RoleService
+from src.services.user import UserService
 
 
 class InternalServiceGateway(BaseGateway):
